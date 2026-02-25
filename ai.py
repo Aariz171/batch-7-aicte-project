@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 import os
 import streamlit as st
 import google.genai as genai
-from PIL import Image
 import re
 
 # Load environment variables from project.env using absolute path
@@ -39,16 +38,6 @@ def get_gemini_response(input_prompt, image_data=None):
     except Exception as e:
         st.error(f"Error generating response: {e}")
         return None
-
-def input_image_setup(uploaded_file):
-    if uploaded_file is not None:
-        byte_data = uploaded_file.getvalue()
-        image_parts = [{
-            "mime_type": uploaded_file.type,
-            "data": byte_data
-        }]
-        return image_parts
-    return None
 
 # App layout and user interface
 st.set_page_config(page_title="AI-Powered Study Buddy", layout="wide")
@@ -393,4 +382,5 @@ with tab4:
                     st.session_state.show_answer = False
 
         st.write(f"Card {st.session_state.current_index + 1} of {len(st.session_state.flashcards)}")
+
 
